@@ -16,14 +16,21 @@ public class ComparatorEx {
         );
 
         // ex1. Comparator
+        // ** int 는 compareTo() 메서드를 사용할 수 없으므로, 해당 메서드를 가지고 있는 Integer 객체로 변환해야 한다.
         inventory.sort(new Comparator<Apple>() {
             @Override
             public int compare(Apple a1, Apple a2) {
-                return a1.getWeight().compareTo(a2.getWeight());
+                Integer intA1 = a1.getWeight();
+                Integer intA2 = a2.getWeight();
+                return intA1.compareTo(intA2);
             }
         });
 
-        inventory.sort((Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()));
+        inventory.sort((Apple a1, Apple a2) -> {
+            Integer intA1 = a1.getWeight();
+            Integer intA2 = a2.getWeight();
+            return intA1.compareTo(intA2);
+        });
     }
 
 
