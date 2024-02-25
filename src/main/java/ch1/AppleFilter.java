@@ -1,9 +1,13 @@
 package ch1;
 
 
+import ch2.Apple;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 
 public class AppleFilter {
@@ -31,8 +35,10 @@ public class AppleFilter {
 
         List<Apple> streamApples = inventory.stream()
                 .filter((Apple apple) -> GREEN.equals(apple.getColor()))
-                .toList();
+                .collect(toList());
     }
+
+
 
 
     // 자바 8 이전 : 초록 사과 List
