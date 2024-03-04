@@ -4,6 +4,8 @@ import ch4.Dish;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.IntSupplier;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static ch4.Dish.Type;
@@ -66,6 +68,26 @@ public class Quiz {
         Stream.iterate(new int[]{0, 1}, arr1 -> new int[]{arr1[1], arr1[0]+arr1[1]})
                 .limit(20)
                 .forEach(arr1-> System.out.println("(" + arr1[0]+", "+arr1[1] + ")"));
+
+        // generate로 피보나치수열 집합 무한스트림 구현하기
+        IntSupplier fib = new IntSupplier() {
+            private int previous = 0;
+            private int current = 1;
+            @Override
+            public int getAsInt() {
+                int oldPrevious = this.previous;
+                int nextValue = this.previous + this.current;
+
+                this.previous = this.current;
+                this.current = nextValue;
+
+                return oldPrevious;
+            }
+        };
+
+        IntStream.generate(fib)
+                .limit(20)
+                .forEach(System.out::println);
 
     }
 
